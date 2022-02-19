@@ -40,6 +40,6 @@ const ElImage = styled.div`
   background-image: url("${(props) => props.src}");
   background-repeat: no-repeat;
   background-size: cover;
-`
+`;
 
 export default Image;

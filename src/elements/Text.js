@@ -12,6 +12,14 @@ const Text = (props) => {
     is_color: is_color,
   }
 
+  const styles={
+    is_size:is_size,
+    is_color:is_color,
+    is_margin:is_margin,
+    is_padding:is_padding
+
+  }
+
   return (
     <>
       <ElText {...styles} onClick={_onClick}>{children}</ElText>

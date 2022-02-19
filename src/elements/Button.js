@@ -2,7 +2,18 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Button = (props) => {
-  const { children, is_margin, is_padding, is_width, is_background, is_color, is_border, is_radius, _onClick } = props;
+  const { children, is_margin, is_padding, is_width, is_background, is_color, is_border, is_radius, is_height,_onClick } = props;
+
+  const styles = {
+    is_margin: is_margin,
+    is_width: is_width,
+    is_padding: is_padding,
+    is_color: is_color,
+    is_background: is_background,
+    is_height: is_height,
+    is_border: is_border,
+    is_radius: is_radius
+}
 
   const styles = {
     is_margin: is_margin,
