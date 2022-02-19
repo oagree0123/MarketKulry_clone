@@ -6,11 +6,10 @@ const Image = (props) => {
 
   const styles = {
     src: src,
-    is_width:is_width,
+    is_width: is_width,
     is_height: is_height,
     is_margin: is_margin,
-    is_padding: is_padding
-
+    is_padding: is_padding,
   }
 
   return (
@@ -39,7 +38,8 @@ const ElImage = styled.div`
   ${(props) => (props.is_width? `width: ${props.is_width};` : 'width: 100%;')};
   ${(props) => (props.is_height? `height: ${props.is_height};` : 'height: 100%;')};
   background-image: url("${(props) => props.src}");
-  background-size: cover; 
-`
+  background-repeat: no-repeat;
+  background-size: cover;
+`;
 
 export default Image;

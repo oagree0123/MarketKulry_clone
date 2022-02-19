@@ -4,21 +4,20 @@ import styled from 'styled-components';
 const Input = (props) => {
   const { _onChange, is_margin, is_padding, is_width, is_height, is_color, is_border, is_radius, value, type, placeholder } = props;
 
-
   const styles = {
     is_margin: is_margin,
-    is_width: is_width,
     is_padding: is_padding,
-    is_color: is_color,
+    is_width: is_width,
     is_height: is_height,
+    is_color: is_color,
     is_border: is_border,
-    is_radius: is_radius
-   
-}
+    is_radius: is_radius,
+  }
+
   return (
     <>
       <ElInput 
-      {...styles}
+        {...styles}
         value={value} 
         placeholder={placeholder} 
         type={type} 

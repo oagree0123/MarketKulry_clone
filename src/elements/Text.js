@@ -2,7 +2,15 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Text = (props) => {
-  const { children, is_size, is_color, is_margin, is_padding, _onClick } = props;
+  const { children, is_size, is_color, is_margin, is_padding, _onClick, is_bold } = props;
+
+  const styles = {
+    is_bold: is_bold,
+    is_margin: is_margin,
+    is_padding: is_padding,
+    is_size: is_size,
+    is_color: is_color,
+  }
 
   const styles={
     is_size:is_size,

@@ -15,6 +15,16 @@ const Button = (props) => {
     is_radius: is_radius
 }
 
+  const styles = {
+    is_margin: is_margin,
+    is_padding: is_padding,
+    is_width: is_width,
+    is_color: is_color,
+    is_border: is_border,
+    is_radius: is_radius,
+    is_background: is_background,
+  }
+
   return (
     <>
       <ElButton {...styles} onClick={_onClick}>{children}</ElButton>
