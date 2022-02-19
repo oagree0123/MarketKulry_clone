@@ -13,7 +13,7 @@ const Product =(props) =>{
     return(
         <ProductContainer>
             <div onClick={()=>{
-                history.push(`/detail/${productId}`)
+                history.push(`/product/${productId}`)
             }}>
             <Image src={productImg} is_width={"249px"} is_height={"320px"} />
             <Text>{productName}</Text>

@@ -18,7 +18,7 @@ const Input = (props) => {
     <>
       <ElInput 
         {...styles}
-        value={value} 
+        // value={value} 
         placeholder={placeholder} 
         type={type} 
         onChange={_onChange}
