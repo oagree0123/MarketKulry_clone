@@ -208,11 +208,14 @@ const ButtonWrap = styled.div`
 `;
 
 const SpaceDiv = styled.div`
+  position: absolute;
+  top: 156px;
   margin: 0;
   padding: 0;
   width: 100%;
   height: 9px;
   background: url(https://res.kurly.com/pc/service/common/1902/bg_1x9.png) repeat-x 0 100%;
+  z-index: 299;
 `;
 
 

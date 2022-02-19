@@ -1,10 +1,15 @@
-import React from 'react';
+import React from "react";
 
-const Main = () => {
-  return (
-    <>
-    </>
-  );
-};
+import ProductList from "../components/ProductList";
+
+const Main = ()=>{
+    
+      
+    return(
+        <div>
+            <ProductList/>
+        </div>
+    )
+}
 
 export default Main;
