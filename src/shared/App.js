@@ -1,24 +1,22 @@
-import logo from './logo.svg';
 import './App.css';
+import styled from 'styled-components';
+import { ConnectedRouter } from 'connected-react-router';
+import { Route } from 'react-router-dom';
+import { history } from '../redux/configStore';
+
+import Main from '../pages/Main';
+import ProductDetail from '../pages/ProductDetail';
+import Header from "../components/Header";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Header />
+      <ConnectedRouter history={history}>
+        <Route path='/' exact component={Main} />
+        <Route path='/product/:id' exact component={ProductDetail} />
+      </ConnectedRouter>
+    </>
   );
 }
 
