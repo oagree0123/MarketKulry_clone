@@ -16,7 +16,9 @@ const CartList = (props) => {
 
 
   useEffect(() => {
-    dispatch(cartActinos.getCartDB());
+    if(cart_list){
+      dispatch(cartActinos.getCartDB());
+    }
   }, [])
 
   return (
@@ -69,9 +71,12 @@ const CartList = (props) => {
       <CartContent>
         <CartListWrap>
           {/* Cart */}
-          {cart_list.map((c, i) => {
+          {cart_list ?
+          cart_list.map((c, i) => {
             return <Cart key={i} {...c} />
-          })}
+          }):
+          null
+          }
         </CartListWrap>
         <OrderInfo />
       </CartContent>

@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { actionCreators as cartActions } from "../redux/modules/cart";
 
 const Cart = (props) => {
+  console.log(props);
   const dispatch = useDispatch();
 
   const [item_select, setItemSelect] = useState(true);

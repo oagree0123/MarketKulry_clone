@@ -4,6 +4,8 @@ import moment from "moment";
 import api from "../../api/api";
 import axios from "axios";
 
+const token = sessionStorage.getItem('token');
+
 // actions
 const GET_PRODUCT = "GET_PRODUCT";
 
@@ -28,8 +30,9 @@ const initialPost = {
 
 const getProductDB = () => {
   return async function (dispatch, getState) {
-    await axios
-      .get("http://localhost:3003/product")
+    /* await axios
+    .get("http://localhost:3003/product") */
+    api.get("/products")
       .then((response) => {
         //console.log("LikePst",response.data.sortByLike);
         console.log(response.data);
@@ -43,8 +46,9 @@ const getProductDB = () => {
 
 const getOneProductDB = (product_id) => {
   return async function (dispatch, useState, { history }) {
-    await axios
-      .get(`http://localhost:3003/product/${product_id}`)
+    /* await axios
+    .get(`http://localhost:3003/product/${product_id}`) */
+    api.get(`/product/${product_id}`)
       .then(function (response) {
         console.log(response.data);
         dispatch(getProduct([response.data]));
