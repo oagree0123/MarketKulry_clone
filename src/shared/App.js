@@ -5,10 +5,11 @@ import {Route} from "react-router-dom"
 import { ConnectedRouter } from "connected-react-router";
 import { history } from "../redux/configStore";
 
-import Header from "../components/Header";
-import Main from '../pages/Main';
 import Login from '../pages/Login';
+import Main from '../pages/Main';
 import ProductDetail from '../pages/ProductDetail';
+import Header from "../components/Header";
+import Footer from '../components/Footer';
 import CartList from '../pages/CartList';
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
         <Route path='/product/:id' exact component={ProductDetail} />
         <Route path='/cart/:username' exact component={CartList} />
       </ConnectedRouter>
+      <Footer/>
     </>
   );
 }

@@ -17,7 +17,7 @@ const Login = () =>{
             window.alert("어허! 똑바로 입력하지 못 할까!!")
                return;
            }
-        dispatch(userActions.logInMK(username,password))
+        dispatch(userActions.logInDB(username,password))
     }
 
     return(

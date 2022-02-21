@@ -18,9 +18,30 @@ const initialState = {
       
 }
 
+const nori = () => {
+    return async function (dispatch, getState,{history}) {
+        const token = localStorage.getItem('token');
+        //dispatch(login(data.loginId));
+        await api.get('/userinfo',{                
+            headers: {
+                Authorization:`${token}`
+            }
+        })
+            .then((response) => {
+                // console.log("토큰 확인했나요",response.headers.authorization);
+              
+                    console.log(response.data)
+                }
+    )
+            .catch((err) => {
+               console.log(err);
+            //    window.alert("아이디와 비밀번호가 일치하지 않습니다.")
+        })
+    }
+}
 
 //middleware actions
-const logInMK = (username, password) => {
+const logInDB = (username, password) => {
     /* aaaa1234! abc */
     return async function (dispatch, getState,{history}) {
         const data = {
@@ -30,18 +51,18 @@ const logInMK = (username, password) => {
         //dispatch(login(data.loginId));
         await api.post('/user/login', data)
             .then((response) => {
-                console.log(response);
-                if (response.headers.Authorization) {
-                    localStorage.setItem('token', response.headers.Authorization);
+                // console.log("토큰 확인했나요",response.headers.authorization);
+                if (response.headers.authorization) {
+                    localStorage.setItem('token', response.headers.authorization);
                     // dispatch(login(response))
-                    // history.push('/')
+                     history.push('/')
                     //window.location.replace("/")
                     console.log("로그인이 되었어요")
                 }
             })
             .catch((err) => {
                console.log(err);
-               window.alert("아이디와 비밀번호가 일치하지 않습니다.")
+            //    window.alert("아이디와 비밀번호가 일치하지 않습니다.")
         })
     }
 }
@@ -66,8 +87,9 @@ export default handleActions({
 //action creator export
 const actionCreators = {
     logIn,
-    logInMK,
-    logOut
+    logInDB,
+    logOut,
+    nori
 };
 
 export { actionCreators }

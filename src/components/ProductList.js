@@ -91,20 +91,22 @@ const ProductListWrap = styled.div`
   width: 1050px;
   height: 435px;
 `;
+
 const ProductListContainer = styled.div`
-  width: 1050px;
-  height: 584px;
-  margin: 0 auto;
+    width: 1050px;
+    height: 584px;
+    margin: 0 auto;
+    padding:32px 0px 40px
 `;
+
 const ProductListTitle = styled.div`
   width: 1050px;
   height: 50px;
   text-align: center;
   margin: 0px 0px 27px;
 `;
-const StyledSlider = styled(Slider)`
-  height: 90%; //슬라이드 컨테이너 영역
 
+const StyledSlider = styled(Slider)`
   .slick-list {
     //슬라이드 스크린
     width: 1050px;
@@ -113,20 +115,61 @@ const StyledSlider = styled(Slider)`
     overflow-x: hidden;
   }
 
-  .slick-slide div {
-    //슬라이더  컨텐츠
-    /* cursor: pointer; */
+  .slick-slide div { //슬라이더  컨텐츠
+     cursor: pointer; 
   }
 
-  .slick-dots {
-    //슬라이드의 위치
-    bottom: 20px;
-    margin-top: 200px;
+  .slick-track:before {
+    clear: both;
+    display: table; 
   }
+  
+  .slick-next:before{
+    color: #000;
+    width: 60px;
+    height: 60px;
+    right: 0ps;
+    font-size: 60px;
+    z-index: 100;;
+    position: absolute;
+    transform: translate(50%, -50%);
+    transition: background 0.5s ease 0s;
+    overflow: visible;
 
-  .slick-track {
-    //이건 잘 모르겠음
-    width: 100%;
+    content: url(https://s3.ap-northeast-2.amazonaws.com/res.kurly.com/kurly/ico/2021/arrow_list_right_60_60.svg);
   }
+  
+  .slick-prev:before {
+    color: #000;
+    width: 60px;
+    height: 60px;
+    left: 0px;
+   
+    font-size: 60px;
+    z-index: 100;;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    transition: background 0.5s ease 0s;
+    overflow: visible;
+
+    content: url(https://s3.ap-northeast-2.amazonaws.com/res.kurly.com/kurly/ico/2021/arrow_list_left_over_60_60.svg);
+  }
+  
+  .slick-track:after{
+    clear: both;
+
+    display: table;
+    //content: '';
+
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0
+  }
+`;
+
+const NextButton = styled.button`
+  width: 60px;
+  height: 60px;
+  border-radius: 60px;
 `;
 export default ProductList;
