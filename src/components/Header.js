@@ -63,7 +63,14 @@ const Header = (props) => {
           <ButtonWrap>
             <Image is_width="36px" is_height="36px" src="https://res.kurly.com/pc/ico/2008/ico_delivery_setting.svg?ver=1" />
             <Image is_margin="0px 16px 0px 16px" is_width="36px" is_height="36px" src="https://res.kurly.com/pc/service/pick/btn-heart-off.svg" />
-            <Image is_width="36px" is_height="36px" src="https://res.kurly.com/pc/service/common/2011/ico_cart.svg" />
+            <Image 
+              is_width="36px" 
+              is_height="36px" 
+              src="https://res.kurly.com/pc/service/common/2011/ico_cart.svg" 
+              _onClick={() => {
+                history.replace('/cart/ohyes')
+              }}
+            />
           </ButtonWrap>
         </GnbList>
       </GnbWrap>

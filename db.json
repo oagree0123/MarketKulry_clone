@@ -1,0 +1,69 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  },
+  "product": [
+    {
+      "id" : 1,
+      "productId" : 1,
+      "productName" : "[한와담 블랙] 곱개장",
+      "price" : 8900,
+      "desc" : "칼칼하게 즐기는 곱창 육개장",
+      "productImg" : "https://img-cf.kurly.com/shop/data/goods/1637822466321y0.jpg"
+    },
+    {
+      "id": 2,
+      "productId": 2,
+      "productName" : "[블루] MSC인증 자숙랍스터 2미 (냉동)",
+      "price" : 42000,
+      "desc" : "손쉽게 즐기는 탱글한 속살",
+      "productImg" : "https://img-cf.kurly.com/shop/data/goods/1637650155968y0.jpg"
+    },
+    {
+      "id": 3,
+      "productId": 3,
+      "productName" : "[오뗄블랙라벨] 1980 알뜰 소시지",
+      "price" : 4900,
+      "desc" : "추억의 분홍 소시지",
+      "productImg" : "https://img-cf.kurly.com/shop/data/goods/1642140736583y0.jpg"
+    },
+    {
+      "id": 4,
+      "productId" : 4,
+      "productName" : "[한와담 블랙] 곱개장",
+      "price" : 8900,
+      "desc" : "칼칼하게 즐기는 곱창 육개장",
+      "productImg" : "https://img-cf.kurly.com/shop/data/goods/1637822466321y0.jpg"
+    },
+    {
+      "id": 5,
+      "productId": 5,
+      "productName" : "[블루] MSC인증 자숙랍스터 2미 (냉동)",
+      "price" : 42000,
+      "desc" : "손쉽게 즐기는 탱글한 속살",
+      "productImg" : "https://img-cf.kurly.com/shop/data/goods/1637650155968y0.jpg"
+    },
+    {
+      "id": 6,
+      "productId": 6,
+      "productName" : "[오뗄블랙라벨] 1980 알뜰 소시지",
+      "price" : 4900,
+      "desc" : "추억의 분홍 소시지",
+      "productImg" : "https://img-cf.kurly.com/shop/data/goods/1642140736583y0.jpg"
+    }
+  ]
+}
