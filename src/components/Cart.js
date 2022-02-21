@@ -55,7 +55,7 @@ const Cart = (props) => {
                     return;
                   }
                   setCount(count - 1);
-                  editItemCount(count);
+                  editItemCount(count - 1);
                 }}
               >
                 -
@@ -64,7 +64,7 @@ const Cart = (props) => {
               <CardBtn
                 onClick={() => {
                   setCount(count + 1);
-                  editItemCount(count);
+                  editItemCount(count + 1);
                 }}
               >
                 +

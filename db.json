@@ -72,6 +72,7 @@
       "productInCartId": 1,
       "count": 5,
       "product": {
+        "id": 1,
         "productId": 1,
         "productName": "[한와담 블랙] 곱개장",
         "price": 8900,

@@ -5,12 +5,12 @@ import {Route} from "react-router-dom"
 import { ConnectedRouter } from "connected-react-router";
 import { history } from "../redux/configStore";
 
-import Login from '../pages/Login';
-import Main from '../pages/Main';
-import ProductDetail from '../pages/ProductDetail';
+import Login from '../page/Login';
+import Main from '../page/Main';
+import ProductDetail from '../page/ProductDetail';
 import Header from "../components/Header";
 import Footer from '../components/Footer';
-import CartList from '../pages/CartList';
+import CartList from '../page/CartList';
 import { useDispatch } from 'react-redux';
 import { actionCreators as userActions } from '../redux/modules/user'
 

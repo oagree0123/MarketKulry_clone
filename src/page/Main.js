@@ -25,6 +25,8 @@ const Main = () => {
   );
 };
 const MainContainer = styled.div`
+  margin: 0 auto;
+  width: 100%;
   word-break: break-all;
 `;
 

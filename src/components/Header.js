@@ -93,7 +93,7 @@ const Header = (props) => {
               is_height="36px" 
               src="https://res.kurly.com/pc/service/common/2011/ico_cart.svg" 
               _onClick={() => {
-                history.replace('/cart/ohyes')
+                history.push('/cart/ohyes')
               }}
             />
           </ButtonWrap>
