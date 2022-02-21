@@ -79,6 +79,11 @@ const Cart = (props) => {
   );
 };
 
+const CartListWrap = styled.div`
+  width: 742px;
+  border-bottom: 1px solid #000;
+`;
+
 const ItemCheckBtn = styled.button`
   margin-right: 32px;
   width: 24px;
