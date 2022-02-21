@@ -1,13 +1,22 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 
 import { Text, Button } from '../elements';
+import { actionCreators as cartActions } from '../redux/modules/cart';
 
 const Detail = (props) => {
+  const dispatch = useDispatch();
+
+  const product_id = props.product_id;
 
   const [count, setCount] = useState(1);
   const [price, setPrice] = useState(props.price);
   const [point, setPoint] = useState(38);
+
+  const clickOrder = () => {
+    dispatch(cartActions.addCartDB(product_id, count))
+  }
 
   return (
     <DetailWrap>
@@ -266,7 +275,7 @@ const Detail = (props) => {
             <CartBtnWrap>
               <LikeBtn />
               <AlarmBtn disabled />
-              <CartBtn >장바구니 담기</CartBtn>
+              <CartBtn onClick={clickOrder} >장바구니 담기</CartBtn>
             </CartBtnWrap>
           </CartWrap>
         </ContentDesc>  
