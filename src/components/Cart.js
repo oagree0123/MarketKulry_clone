@@ -1,16 +1,29 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
+import { actionCreators as cartActions } from "../redux/modules/cart";
 
 const Cart = (props) => {
-  const [itemSelect, setItemSelect] = useState(true);
-  const [count, setCount] = useState(1);
-  
+  const dispatch = useDispatch();
+
+  const [item_select, setItemSelect] = useState(true);
+  const [count, setCount] = useState(props.count);
+  const [cur_price, setCurPrice] = useState(props.product.price * props.count);
+
+  const editItemCount = (cur_count) => {
+    dispatch(cartActions.editCartCountDB(props.productInCartId, cur_count));
+  }
+
+  const deleteItem = () => {
+    dispatch(cartActions.deleteCartDB(props.productInCartId))
+  }
+
   return (
     <>
       <CartCards>
         <CartCard>
           <CardInfoWrap>
-            {itemSelect ? (
+            {item_select ? (
               <ItemCheckBtn
                 onClick={() => {
                   setItemSelect(false);
@@ -30,9 +43,9 @@ const Cart = (props) => {
                 hegiht: "78ox",
               }}
               alt="productImg"
-              src="https://img-cf.kurly.com/shop/data/goods/1637822466321y0.jpg"
+              src={props.product.productImg}
             />
-            <CardTitle>[한와담 블랙] 곱개장</CardTitle>
+            <CardTitle>{props.product.productName}</CardTitle>
           </CardInfoWrap>
           <CardPriceWrap>
             <CardBtnWrap>
@@ -42,6 +55,7 @@ const Cart = (props) => {
                     return;
                   }
                   setCount(count - 1);
+                  editItemCount(count);
                 }}
               >
                 -
@@ -50,66 +64,14 @@ const Cart = (props) => {
               <CardBtn
                 onClick={() => {
                   setCount(count + 1);
+                  editItemCount(count);
                 }}
               >
                 +
               </CardBtn>
             </CardBtnWrap>
-            <CardPrice>8,900원</CardPrice>
-            <CardCloseBtn />
-          </CardPriceWrap>
-        </CartCard>
-      </CartCards>
-      <CartCards>
-        <CartCard>
-          <CardInfoWrap>
-            {itemSelect ? (
-              <ItemCheckBtn
-                onClick={() => {
-                  setItemSelect(false);
-                }}
-              />
-            ) : (
-              <ItemUnCheckBtn
-                onClick={() => {
-                  setItemSelect(true);
-                }}
-              />
-            )}
-            <img
-              style={{
-                display: "block",
-                width: "60px",
-                hegiht: "78ox",
-              }}
-              alt="productImg"
-              src="https://img-cf.kurly.com/shop/data/goods/1637822466321y0.jpg"
-            />
-            <CardTitle>[한와담 블랙] 곱개장</CardTitle>
-          </CardInfoWrap>
-          <CardPriceWrap>
-            <CardBtnWrap>
-              <CardBtn
-                onClick={() => {
-                  if (count <= 0) {
-                    return;
-                  }
-                  setCount(count - 1);
-                }}
-              >
-                -
-              </CardBtn>
-              <CardCnt>{count}</CardCnt>
-              <CardBtn
-                onClick={() => {
-                  setCount(count + 1);
-                }}
-              >
-                +
-              </CardBtn>
-            </CardBtnWrap>
-            <CardPrice>8,900원</CardPrice>
-            <CardCloseBtn />
+            <CardPrice>{cur_price.toLocaleString('ko-KR')}원</CardPrice>
+            <CardCloseBtn onClick={deleteItem} />
           </CardPriceWrap>
         </CartCard>
       </CartCards>

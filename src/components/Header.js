@@ -1,10 +1,22 @@
 import React from 'react';
 import styled from 'styled-components';
 import { history } from '../redux/configStore';
+import { useDispatch, useSelector } from 'react-redux';
+import { getCookie } from '../shared/Cookie';
 
 import { Button, Text, Image, Input } from '../elements';
+import { actionCreators as userActions } from '../redux/modules/user';
 
 const Header = (props) => {
+  const dispatch = useDispatch();
+
+  const userInfo = useSelector(state => state.user.userInfo);
+  const is_login = useSelector(state => state.user.is_login);
+
+  const clickLogout = () => {
+    dispatch(userActions.logOut());
+  }
+
   return (
     <HeaderWrap>
       <HeaderTop>
@@ -13,20 +25,33 @@ const Header = (props) => {
           is_height="22px"
           src="https://res.kurly.com/pc/service/common/2011/delivery_210801.png" 
         />
-        <UserMenu>
-          <UserMenuItem style={{color:"#5f0080"}}>
-              회원가입
-          </UserMenuItem>
-          <UserMenuItem onClick={() => {
-            history.push('/login');
-          }}>
-            로그인
-          </UserMenuItem>
-          <UserMenuItem>
-            고객센터
-          </UserMenuItem>
-        </UserMenu>
+        {is_login ?
+          <UserMenu>
+            <UserMenuItem onClick={() => {
+              history.push('/login');
+            }}>
+              {userInfo.name} 님
+            </UserMenuItem>
+            <UserMenuItem onClick={clickLogout}>
+              로그아웃
+            </UserMenuItem>
+          </UserMenu> :
+          <UserMenu>
+            <UserMenuItem style={{color:"#5f0080"}}>
+                회원가입
+            </UserMenuItem>
+            <UserMenuItem onClick={() => {
+              history.push('/login');
+            }}>
+              로그인
+            </UserMenuItem>
+            <UserMenuItem>
+              고객센터
+            </UserMenuItem>
+          </UserMenu>
+        }
       </HeaderTop>
+
         <LogoWrap>
           <Logo>
             <LogoImg 
