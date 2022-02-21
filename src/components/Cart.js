@@ -8,11 +8,14 @@ const Cart = (props) => {
   const dispatch = useDispatch();
 
   const [item_select, setItemSelect] = useState(true);
-  const [count, setCount] = useState(props.count);
-  const [cur_price, setCurPrice] = useState(props.product.price * props.count);
 
-  const editItemCount = (cur_count) => {
-    dispatch(cartActions.editCartCountDB(props.productInCartId, cur_count));
+  const editItemCount = (type) => {
+    if(type === "plus") {
+      dispatch(cartActions.editCartCountDB(props.productInCartId, props.count+1));
+    }
+    else if(type === "minus") {
+      dispatch(cartActions.editCartCountDB(props.productInCartId, props.count-1));
+    }
   }
 
   const deleteItem = () => {
@@ -52,26 +55,24 @@ const Cart = (props) => {
             <CardBtnWrap>
               <CardBtn
                 onClick={() => {
-                  if (count <= 0) {
+                  if (props.count <= 0) {
                     return;
                   }
-                  setCount(count - 1);
-                  editItemCount(count - 1);
+                  editItemCount("minus");
                 }}
               >
                 -
               </CardBtn>
-              <CardCnt>{count}</CardCnt>
+              <CardCnt>{props.count}</CardCnt>
               <CardBtn
                 onClick={() => {
-                  setCount(count + 1);
-                  editItemCount(count + 1);
+                  editItemCount("plus");
                 }}
               >
                 +
               </CardBtn>
             </CardBtnWrap>
-            <CardPrice>{cur_price.toLocaleString('ko-KR')}원</CardPrice>
+            <CardPrice>{(props.product.price * props.count).toLocaleString('ko-KR')}원</CardPrice>
             <CardCloseBtn onClick={deleteItem} />
           </CardPriceWrap>
         </CartCard>
@@ -79,11 +80,6 @@ const Cart = (props) => {
     </>
   );
 };
-
-const CartListWrap = styled.div`
-  width: 742px;
-  border-bottom: 1px solid #000;
-`;
 
 const ItemCheckBtn = styled.button`
   margin-right: 32px;

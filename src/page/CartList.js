@@ -14,6 +14,11 @@ const CartList = (props) => {
 
   const [allSelect, setAllSelect] = useState(true);
 
+  let cur_price = useSelector(state => state.cart.total_price)
+
+  cart_list.map((c, i) => {
+    cur_price = cur_price + (c.count * c.product.price);
+  })
 
   useEffect(() => {
     if(cart_list){
@@ -78,7 +83,7 @@ const CartList = (props) => {
           null
           }
         </CartListWrap>
-        <OrderInfo />
+        <OrderInfo cur_price={cur_price} />
       </CartContent>
     </CartWrap>
   );

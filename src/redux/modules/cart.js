@@ -7,71 +7,21 @@ import axios from "axios";
 // actions
 const GET_CART = "GET_CART";
 const ADD_CART = "ADD_CART";
+const EDIT_CART = "EDIT_CART";
 const DELETE_CART = "DELETE_CART";
 
 // action creators
 const getCart = createAction(GET_CART, (cart_list) => ({cart_list}));
 const addCart = createAction(ADD_CART, (cart_data) => ({cart_data}));
+const editdCart = createAction(EDIT_CART, (cart_id, count) => ({ cart_id, count }));
 const deleteCart = createAction(DELETE_CART, (cart_index) => ({
   cart_index,
 }));
 
 // initial state
 const initialState = {
-  list: [
-    /* {
-      id: 1,
-      productInCartId: 1,
-      count: 5,
-      product: {
-        productId: 1,
-        productName: "[한와담 블랙] 곱개장",
-        price: 8900,
-        desc: "칼칼하게 즐기는 곱창 육개장",
-        productImg:
-          "https://img-cf.kurly.com/shop/data/goods/1637822466321y0.jpg",
-      },
-    },
-    {
-      id: 2,
-      productInCartId: 2,
-      product: {
-        productId: 2,
-        productName: "[블루] MSC인증 자숙랍스터 2미 (냉동)",
-        price: 42000,
-        desc: "손쉽게 즐기는 탱글한 속살",
-        productImg:
-          "https://img-cf.kurly.com/shop/data/goods/1637650155968y0.jpg",
-      },
-      count: 2,
-    },
-    {
-      id: 3,
-      productInCartId: 3,
-      product: {
-        productId: 3,
-        productName: "[오뗄블랙라벨] 1980 알뜰 소시지",
-        price: 4900,
-        desc: "추억의 분홍 소시지",
-        productImg:
-          "https://img-cf.kurly.com/shop/data/goods/1642140736583y0.jpg",
-      },
-      count: 2,
-    },
-    {
-      id: 4,
-      productInCartId: 4,
-      product: {
-        productId: 4,
-        productName: "[오뗄블랙라벨] 1980 알뜰 소시지",
-        price: 4900,
-        desc: "추억의 분홍 소시지",
-        productImg:
-          "https://img-cf.kurly.com/shop/data/goods/1642140736583y0.jpg",
-      },
-      count: 2,
-    }, */
-  ],
+  list: [],
+  total_price: 0,
 };
 
 // middlewares
@@ -137,7 +87,7 @@ const editCartCountDB = (productInCartId, count) => {
         }
       })
       .then((res) => {
-        
+        dispatch(editdCart(productInCartId, count));
       })
       .catch((err) => {
         console.log("카운트 변경 실패", err)
@@ -188,7 +138,25 @@ export default handleActions(
     }),
     [ADD_CART]: (state, action) =>
       produce(state, (draft) => {
-        draft.list.push(action.payload.cart_data);
+        let _card_data = action.payload.cart_data;
+
+        draft.list = draft.list.map((c, i) => {
+          console.log(c);
+          if(c.productInCartId === _card_data.productInCartId) {
+            let new_count = _card_data.count
+            return {...c, count: new_count};
+          } else{
+            return c;
+          }
+        })
+        /* draft.list.push(action.payload.cart_data); */   
+    }),
+    [EDIT_CART]: (state, action) =>
+      produce(state, (draft) => {
+        // 수량 체인지
+        let cart_idx = draft.list.findIndex(v => v.productInCartId === action.payload.cart_id)
+
+        draft.list[cart_idx].count = action.payload.count;
     }),
     [DELETE_CART]: (state, action) =>
       produce(state, (draft) => {
@@ -197,8 +165,7 @@ export default handleActions(
           console.log(action.payload.cart_index);
 
           return (
-            parseInt(action.payload.cart_index) !==
-            parseInt(i)
+            parseInt(action.payload.cart_index) !==parseInt(i)
           );
         });
 
