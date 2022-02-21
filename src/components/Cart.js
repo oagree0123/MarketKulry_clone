@@ -1,80 +1,90 @@
-import React, { useState } from 'react';
-import { useDispatch,useSelector } from 'react-redux';
-import styled from 'styled-components';
-import {actionCreators as cartAction} from '../redux/modules/cart';
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import styled from "styled-components";
+import { actionCreators as cartActions } from "../redux/modules/cart";
 
 const Cart = (props) => {
-  const [itemSelect, setItemSelect] = useState(true);
-  const [count, setCount] = useState(Number(props.count));
+  const dispatch = useDispatch();
 
+  const [item_select, setItemSelect] = useState(true);
+  const [count, setCount] = useState(props.count);
+  const [cur_price, setCurPrice] = useState(props.product.price * props.count);
+
+  const editItemCount = (cur_count) => {
+    dispatch(cartActions.editCartCountDB(props.productInCartId, cur_count));
+  }
+
+  const deleteItem = () => {
+    dispatch(cartActions.deleteCartDB(props.productInCartId))
+  }
 
   return (
     <>
-    <CartListWrap>
       <CartCards>
-            <CartCard>
-              <CardInfoWrap>
-                { itemSelect ?
-                  <ItemCheckBtn onClick={() => {
-                      setItemSelect(false);
-                  }}/>:
-                  <ItemUnCheckBtn onClick={() => {
-                    setItemSelect(true);
-                  }}/>
-                }
-                <img 
-                  style={{
-                    display: "block",
-                    width: "60px",
-                    hegiht: "78ox"
-                  }}
-                  alt='productImg'
-                  src={props.product.productImg}
-                />
-                <CardTitle>{props.product.productName}</CardTitle>
-              </CardInfoWrap>
-              <CardPriceWrap>
-                <CardBtnWrap>
-                  <CardBtn
-                    onClick={() => {
-                      if(count <= 0) {
-                        return;
-                      }
-                      setCount(count-1);
-                    }}
-                  >-</CardBtn>
-                  <CardCnt>{count}</CardCnt>
-                  <CardBtn
-                    onClick={() => {
-                      setCount(count+1);
-                    }}
-                  >+</CardBtn>
-                </CardBtnWrap>
-                <CardPrice>
-                 {count*props.product.price}원
-                </CardPrice>
-                <CardCloseBtn />
-              </CardPriceWrap>
-            </CartCard>
-          </CartCards>
-        </CartListWrap>
+        <CartCard>
+          <CardInfoWrap>
+            {item_select ? (
+              <ItemCheckBtn
+                onClick={() => {
+                  setItemSelect(false);
+                }}
+              />
+            ) : (
+              <ItemUnCheckBtn
+                onClick={() => {
+                  setItemSelect(true);
+                }}
+              />
+            )}
+            <img
+              style={{
+                display: "block",
+                width: "60px",
+                hegiht: "78ox",
+              }}
+              alt="productImg"
+              src={props.product.productImg}
+            />
+            <CardTitle>{props.product.productName}</CardTitle>
+          </CardInfoWrap>
+          <CardPriceWrap>
+            <CardBtnWrap>
+              <CardBtn
+                onClick={() => {
+                  if (count <= 0) {
+                    return;
+                  }
+                  setCount(count - 1);
+                  editItemCount(count - 1);
+                }}
+              >
+                -
+              </CardBtn>
+              <CardCnt>{count}</CardCnt>
+              <CardBtn
+                onClick={() => {
+                  setCount(count + 1);
+                  editItemCount(count + 1);
+                }}
+              >
+                +
+              </CardBtn>
+            </CardBtnWrap>
+            <CardPrice>{cur_price.toLocaleString('ko-KR')}원</CardPrice>
+            <CardCloseBtn onClick={deleteItem} />
+          </CardPriceWrap>
+        </CartCard>
+      </CartCards>
     </>
   );
 };
-
-const CartListWrap = styled.div`
-  width: 742px;
-  border-bottom: 1px solid #000;
-`;
-
-
 
 const ItemCheckBtn = styled.button`
   margin-right: 32px;
   width: 24px;
   height: 24px;
   border: none;
-  background: url('https://res.kurly.com/mobile/service/common/2006/ico_checkbox_checked.svg');
+  background: url("https://res.kurly.com/mobile/service/common/2006/ico_checkbox_checked.svg");
 `;
 
 const ItemUnCheckBtn = styled.button`
@@ -82,7 +92,7 @@ const ItemUnCheckBtn = styled.button`
   width: 24px;
   height: 24px;
   border: none;
-  background: url('https://res.kurly.com/mobile/service/common/2006/ico_checkbox.svg');
+  background: url("https://res.kurly.com/mobile/service/common/2006/ico_checkbox.svg");
 `;
 
 const CartCards = styled.div`
@@ -156,7 +166,7 @@ const CardCloseBtn = styled.button`
   height: 30px;
   border: none;
   background-color: #fff;
-  background-image: url('https://res.kurly.com/pc/service/cart/2007/ico_delete.svg');
+  background-image: url("https://res.kurly.com/pc/service/cart/2007/ico_delete.svg");
   cursor: pointer;
 `;
 
