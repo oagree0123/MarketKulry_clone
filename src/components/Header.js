@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { history } from '../redux/configStore';
 
 import { Button, Text, Image, Input } from '../elements';
 
@@ -16,7 +17,9 @@ const Header = (props) => {
           <UserMenuItem style={{color:"#5f0080"}}>
               회원가입
           </UserMenuItem>
-          <UserMenuItem>
+          <UserMenuItem onClick={() => {
+            history.push('/login');
+          }}>
             로그인
           </UserMenuItem>
           <UserMenuItem>
@@ -26,7 +29,10 @@ const Header = (props) => {
       </HeaderTop>
         <LogoWrap>
           <Logo>
-            <LogoImg
+            <LogoImg 
+              onClick={() => {
+                history.push('/');
+              }}
               alt="logo" 
               src='https://res.kurly.com/images/marketkurly/logo/logo_x2.png' 
             />
@@ -85,6 +91,7 @@ const UserMenu = styled.ul`
   justify-content: center;
   align-items: center;
   list-style-type: none;
+  z-index: 100;
 `;
 
 const UserMenuItem = styled.li`
@@ -94,6 +101,7 @@ const UserMenuItem = styled.li`
   white-space: nowrap;
   font-size: 12px;
   line-height: 35px;
+  cursor: pointer;
 `;
 
 const LogoWrap = styled.div`
@@ -117,6 +125,7 @@ const LogoImg = styled.img`
   margin: 0 auto;
   width: 103px;
   height: 79px;
+  cursor: pointer;
 `;
 
 const GnbWrap = styled.div`
@@ -135,8 +144,8 @@ const HamberWrap = styled.div`
   justify-content: flex-start;
   align-items: center;
   font-size: 16px;
+  font-weight: 500;
   line-height: 20px;
-  font-weight: 700;
   letter-spacing: -0.3px;
 `;
 
@@ -208,11 +217,14 @@ const ButtonWrap = styled.div`
 `;
 
 const SpaceDiv = styled.div`
+  position: absolute;
+  top: 156px;
   margin: 0;
   padding: 0;
   width: 100%;
   height: 9px;
   background: url(https://res.kurly.com/pc/service/common/1902/bg_1x9.png) repeat-x 0 100%;
+  z-index: 299;
 `;
 
 

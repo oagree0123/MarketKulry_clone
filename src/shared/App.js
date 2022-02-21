@@ -10,8 +10,7 @@ import Main from '../pages/Main';
 import ProductDetail from '../pages/ProductDetail';
 import Header from "../components/Header";
 import Footer from '../components/Footer';
-
-
+import CartList from '../pages/CartList';
 
 function App() {
   return (
@@ -21,6 +20,7 @@ function App() {
         <Route path="/" exact component={Main} />
         <Route path="/login" exact component={Login} />
         <Route path='/product/:id' exact component={ProductDetail} />
+        <Route path='/cart/:username' exact component={CartList} />
       </ConnectedRouter>
       <Footer/>
     </>

@@ -12,9 +12,8 @@ const Button = (props) => {
     is_background: is_background,
     is_height: is_height,
     is_border: is_border,
-    is_radius: is_radius
+    is_radius: is_radius,
 }
-
 
   return (
     <>

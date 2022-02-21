@@ -41,8 +41,8 @@ const nori = () => {
 }
 
 //middleware actions
-
 const logInDB = (username, password) => {
+    /* aaaa1234! abc */
     return async function (dispatch, getState,{history}) {
         const data = {
             username: username,
