@@ -1,14 +1,21 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-
+import { useDispatch,useSelector } from 'react-redux';
 import { Text } from '../elements';
 import Cart from '../components/Cart';
+import { actionCreators as cartAction } from '../redux/modules/cart';
 
 const CartList = (props) => {
   const [allSelect, setAllSelect] = useState(true);
   const [itemSelect, setItemSelect] = useState(true);
   const [count, setCount] = useState(1);
+  const dispatch=useDispatch()
+  const cart_list = useSelector((state)=>state.cart.list);
 
+  console.log("cart_list",cart_list)
+  React.useEffect(()=>{
+      dispatch(cartAction.getCartDB())
+  },[]);
   return (
     <CartWrap>
       <CartTitle>
@@ -58,6 +65,11 @@ const CartList = (props) => {
           </CartCheckWrap>
       <CartContent>
         <CartListWrap>
+        {cart_list.map((p, idx) => {
+                    return (
+                        <Cart key={idx} {...p} />
+                    )
+                })}
           {/* Cart */}
           <CartCards>
             <CartCard>
