@@ -21,6 +21,7 @@ const initialState = {
 
 //middleware actions
 const logInMK = (username, password) => {
+    /* aaaa1234! abc */
     return async function (dispatch, getState,{history}) {
         const data = {
             username: username,
