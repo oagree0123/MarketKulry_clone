@@ -70,7 +70,6 @@ const CommentWrite = (props) => {
             {product_data[0]?.productName}
           </CommentTopName>
         </CommentTop>
-
         <div>
           <CommentHeadWrap>
             <CommentTh style={{
