@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import moment from "moment";
 
@@ -8,10 +8,12 @@ import { actionCreators as commentActions } from "../redux/modules/comment";
 const Comment = (props) => {
   const dispatch = useDispatch();
 
+  const user_info = useSelector(state => state.user.userInfo);
+
   const [check_detail, setCheckDetail] = useState(false);
 
   const delReview = () => {
-    dispatch()
+    dispatch(commentActions.deleteCommentDB(props.commentId));
   }
 
   return (
@@ -84,9 +86,14 @@ const Comment = (props) => {
             <ReviewContent>{props.content}</ReviewContent>
           </ReviewWrap>
           <ReviewDelWrap>
-            <ReviewDelBtn 
-              onClick={delReview}
-            >삭제하기</ReviewDelBtn>
+            {user_info.username === props.username ?
+              <ReviewDelBtn 
+                onClick={delReview}
+              >삭제하기</ReviewDelBtn> :
+              <ReviewDelBtn 
+                disabled
+              >삭제하기</ReviewDelBtn>
+            }
           </ReviewDelWrap>
         </CommentDetail>
       }

@@ -12,7 +12,7 @@ const CommentList = (props) => {
   const comment_list = useSelector(state => state.comment.list);
 
   useEffect(() => {
-    dispatch(commentActions.getCommentDB());
+    dispatch(commentActions.getCommentDB(props.product_id));
   }, [])
 
   return (
@@ -90,9 +90,8 @@ const CommentList = (props) => {
         <ReveiwButtonWrap>
           <ReviewButton onClick={() => {
             history.push({
-              pathname: "/",
+              pathname: `/comment/${props.product_id}`,
               state: {
-                productId : props.product_id,
                 productName: props.product_name,
                 productImg: props.product_img
               }

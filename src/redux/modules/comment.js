@@ -22,13 +22,14 @@ const editComment = createAction(EDIT_COMMENT, (postId, commentId, newComment) =
 const initialState = {
     list: [],
     preview: null,
-    uploading: false,
+    uploading: false
 }
 
 //middleware actions
-const getCommentDB = () => {
+const getCommentDB = (productId) => {
   return function (dispatch, getState, {history}) {
-    axios.get('http://localhost:3003/comments')
+    /* axios.get('http://localhost:3003/comments') */
+    api.get(`/product/${productId}/comments`)
     .then((response) => {
       console.log(response.data)
       dispatch(getComment(response.data));

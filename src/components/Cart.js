@@ -46,7 +46,7 @@ const Cart = (props) => {
               style={{
                 display: "block",
                 width: "60px",
-                hegiht: "78ox",
+                height: "78px",
               }}
               alt="productImg"
               src={props.product.productImg}
