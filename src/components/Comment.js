@@ -82,7 +82,10 @@ const Comment = (props) => {
         <CommentDetail>
           <ReviewWrap>
             <ReviewTitle>{props.product_name}</ReviewTitle>
-            <ReviewImg src={props.img} />
+            {props.img ?
+              <ReviewImg src={props.img} />:
+              null
+            }
             <ReviewContent>{props.content}</ReviewContent>
           </ReviewWrap>
           <ReviewDelWrap>
@@ -90,7 +93,10 @@ const Comment = (props) => {
               <ReviewDelBtn 
                 onClick={delReview}
               >삭제하기</ReviewDelBtn> :
-              <ReviewDelBtn 
+              <ReviewDelBtn style={{
+                color: "#eeeeee",
+                border: "1px solid #eeeeee",
+              }}
                 disabled
               >삭제하기</ReviewDelBtn>
             }

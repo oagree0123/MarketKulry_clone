@@ -14,8 +14,8 @@ const EDIT_COMMENT = "EDIT_COMMENT";
 // action creators
 const getComment = createAction(GET_COMMENT, (comment_list) => ({ comment_list }));
 const setPreview = createAction(SET_PREVIEW, (preview) => ({ preview }));
-const addComment = createAction(ADD_COMMENT, (postId, comment, name, date, is_me) => ({ postId, comment, name, date, is_me }));
-const deleteComment = createAction(DELETE_COMMENT, (postId, commentId) => ({ postId, commentId }))
+const addComment = createAction(ADD_COMMENT, (comment_data) => ({ comment_data }));
+const deleteComment = createAction(DELETE_COMMENT, (comment_idx) => ({ comment_idx }))
 const editComment = createAction(EDIT_COMMENT, (postId, commentId, newComment) => ({ postId, commentId, newComment }))
 
 //initialState
@@ -41,11 +41,11 @@ const getCommentDB = (productId) => {
 }
 
 const addCommentDB = (productId, comment = {}) => {
-    return async function (dispatch, getState) {
+    return async function (dispatch, getState, {history}) {
         const token = localStorage.getItem('token');
         const form = new FormData()
         form.append('title', comment.title)
-        form.append('contents', comment.contents)
+        form.append('content', comment.contents)
         form.append('img',comment.img)
         await api.post(`comment/${productId}`, 
         form,
@@ -57,6 +57,8 @@ const addCommentDB = (productId, comment = {}) => {
             }
         ).then(function (response) {
             console.log("response",response)
+            dispatch(addComment(response.data));
+            history.go(-1);
         }).catch((err) => {
             console.log("댓글 추가하기 실패", productId, err);
         })
@@ -66,6 +68,8 @@ const addCommentDB = (productId, comment = {}) => {
 const deleteCommentDB = (commentId) => {
     return async function (dispatch, getState) {
         const token = localStorage.getItem('token');
+
+        const _comment_list = getState().comment.list;
         await api.delete(`/comment/${commentId}`,
             {
                 headers: {
@@ -74,7 +78,11 @@ const deleteCommentDB = (commentId) => {
                 }
             }
         ).then(function (response) {
-            console.log("response",response)
+            const comment_idx = _comment_list.findIndex(c => {
+              return parseInt(c.commentId) === parseInt(commentId);
+            })
+
+            dispatch(deleteComment(comment_idx));
         }).catch((err) => {
             console.log("댓글 삭제가 실패했습니다.", err)
         })
@@ -107,6 +115,7 @@ const editCommentDB = (commentId, newComment={}) => {
 export default handleActions({
    [GET_COMMENT]: (state, action) => 
       produce(state, (draft) => {
+        draft.list = [];
         draft.list.push(...action.payload.comment_list);
 
         draft.list = draft.list.reduce((acc, cur) => {
@@ -126,13 +135,16 @@ export default handleActions({
     }),
     [ADD_COMMENT]: (state, action) =>
      produce(state, (draft) => {
-        draft.list[action.payload.postId].unshift(action.payload);
+        draft.list.unshift(action.payload.comment_data);
     }),
 
     [DELETE_COMMENT]: (state, action) => 
     produce(state, (draft) => {
-        const filter_comment = draft.list[action.payload.postId].filter((c) => c.commentId !== action.payload.commentId)
-        draft.list[action.payload.postId] = filter_comment;
+        const new_comment_list = draft.list.filter((c, i) => {
+          return parseInt(action.payload.comment_idx) !== i;
+        })
+
+        draft.list = new_comment_list;
     }),
 
     [EDIT_COMMENT]: (state, action) => 

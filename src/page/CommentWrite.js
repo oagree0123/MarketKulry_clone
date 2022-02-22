@@ -12,8 +12,6 @@ const CommentWrite = (props) => {
   const product_data = useSelector((state) => state.product.list);
   const preview = useSelector((state) => state.comment.preview);
 
-  console.log(product_data[0])
-
   const [count, setCount] = React.useState("");
   const [contents, setContents] = React.useState("");
   const [title, setTitle] = React.useState("");
@@ -26,7 +24,7 @@ const CommentWrite = (props) => {
   }, []);
 
   const addComment = () => {
-    if (title == "" || contents == "") {
+    if (title === "" || contents === "") {
       window.alert("게시물을 다 넣어주세요!");
       return;
     }

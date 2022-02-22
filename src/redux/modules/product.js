@@ -32,7 +32,6 @@ const getProductDB = () => {
   return async function (dispatch, getState) {
     api.get("/products")
       .then((response) => {
-        console.log(response.data);
         dispatch(getProduct(response.data));
       })
       .catch((err) => {
@@ -45,7 +44,6 @@ const getOneProductDB = (product_id) => {
   return async function (dispatch, useState, { history }) {
     api.get(`/product/${product_id}`)
       .then(function (response) {
-        console.log(response.data);
         dispatch(getProduct([response.data]));
       })
       .catch((err) => {

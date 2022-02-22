@@ -86,7 +86,8 @@ const StyledSlider = styled(Slider)`
     color: #000;
     width: 60px;
     height: 60px;
-    right: -5px;
+    top: -55px;
+    right: 30px;
     font-size: 60px;
     z-index: 100;
     position: absolute;
@@ -101,8 +102,8 @@ const StyledSlider = styled(Slider)`
     color: #000;
     width: 60px;
     height: 60px;
-    left: 0px;
-   
+    top: -55px;
+    left: 18px;
     font-size: 60px;
     z-index: 100;;
     position: absolute;
