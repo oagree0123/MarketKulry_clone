@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 
 import { Text, Button } from '../elements';
@@ -10,12 +10,17 @@ const Detail = (props) => {
   const dispatch = useDispatch();
 
   const product_id = props.product_id;
+  const is_login = useSelector(state => state.user.is_login);
 
   const [count, setCount] = useState(1);
   const [price, setPrice] = useState(props.price);
   const [point, setPoint] = useState(38);
 
   const clickOrder = () => {
+    if(!is_login) {
+      window.alert("로그인 후 사용가능합니다!")
+      return;
+    }
     dispatch(cartActions.addCartDB(product_id, count))
   }
 
@@ -642,6 +647,7 @@ const CartBtn = styled.button`
   font-size: 16px;
   font-weight: 600;
   line-height: normal;
+  cursor: pointer;
 `;
 
 const DetailInfoWrap = styled.div`

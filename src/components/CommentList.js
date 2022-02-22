@@ -10,9 +10,10 @@ const CommentList = (props) => {
   const dispatch = useDispatch()
 
   const comment_list = useSelector(state => state.comment.list);
+  const is_login = useSelector(state => state.user.is_login);
 
   useEffect(() => {
-    dispatch(commentActions.getCommentDB());
+    dispatch(commentActions.getCommentDB(props.product_id));
   }, [])
 
   return (
@@ -88,16 +89,19 @@ const CommentList = (props) => {
           }
         </CommentTable>
         <ReveiwButtonWrap>
-          <ReviewButton onClick={() => {
-            history.push({
-              pathname: "/",
-              state: {
-                productId : props.product_id,
-                productName: props.product_name,
-                productImg: props.product_img
-              }
-            })
-          }}>후기쓰기</ReviewButton>
+          { is_login ? 
+            <ReviewButton onClick={() => {
+              history.push({
+                pathname: `/comment/${props.product_id}`
+              })
+            }}>후기쓰기</ReviewButton>:
+            <ReviewButton style={{
+              color: "#fff",
+              backgroundColor: "#eee",
+              border: "none",
+            }}
+            disabled>후기쓰기</ReviewButton>
+          }
         </ReveiwButtonWrap>
       </CommentListWrap>
     </>

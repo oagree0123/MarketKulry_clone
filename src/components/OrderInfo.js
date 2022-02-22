@@ -9,6 +9,8 @@ const OrderInfo = (props) => {
 
   const productInCartIdList = [];
   const cart_list = props;
+
+  const is_login = useSelector(state => state.user.is_login);
   
   for(let i=0; i < cart_list.length; i++){
     productInCartIdList.push(cart_list[i].productInCartId)
@@ -156,6 +158,10 @@ const OrderInfo = (props) => {
           </TotalPriceWrap>
           <OrderBtn 
           onClick={()=>{
+            if(!is_login) {
+              window.alert("로그인 후 주문이 가능합니다!")
+              return;
+            }
             orderCart()
           }}
           >
