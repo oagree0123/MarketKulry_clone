@@ -1,15 +1,18 @@
 import { createAction, handleActions } from "redux-actions";
-import { produce } from "immer";
-import api from "../../api/api"
-
+import produce from 'immer';
+import moment from "moment";
+import api from "../../api/api";
+import axios from "axios";
 
 // actions
+const GET_COMMENT = "GET_COMMENT";
 const SET_PREVIEW = "SET_PREVIEW"
 const ADD_COMMENT = "ADD_COMMENT";
 const DELETE_COMMENT = "DELETE_COMMENT";
 const EDIT_COMMENT = "EDIT_COMMENT";
 
 // action creators
+const getComment = createAction(GET_COMMENT, (comment_list) => ({ comment_list }));
 const setPreview = createAction(SET_PREVIEW, (preview) => ({ preview }));
 const addComment = createAction(ADD_COMMENT, (postId, comment, name, date, is_me) => ({ postId, comment, name, date, is_me }));
 const deleteComment = createAction(DELETE_COMMENT, (postId, commentId) => ({ postId, commentId }))
@@ -17,12 +20,25 @@ const editComment = createAction(EDIT_COMMENT, (postId, commentId, newComment) =
 
 //initialState
 const initialState = {
-    list: {},
+    list: [],
     preview: null,
     uploading: false,
 }
 
 //middleware actions
+const getCommentDB = () => {
+  return function (dispatch, getState, {history}) {
+    axios.get('http://localhost:3003/comments')
+    .then((response) => {
+      console.log(response.data)
+      dispatch(getComment(response.data));
+    })
+    .catch((err) => {
+      console.log("댓글 가져오기 실패", err);
+    })
+  }
+}
+
 const addCommentDB = (productId, comment = {}) => {
     return async function (dispatch, getState) {
         const token = localStorage.getItem('token');
@@ -88,6 +104,20 @@ const editCommentDB = (commentId, newComment={}) => {
 
 //reducer
 export default handleActions({
+   [GET_COMMENT]: (state, action) => 
+      produce(state, (draft) => {
+        draft.list.push(...action.payload.comment_list);
+
+        draft.list = draft.list.reduce((acc, cur) => {
+          if(acc.findIndex(a => a.commentId === cur.commentId) === -1) {
+            return [...acc, cur];
+          } else {
+            acc[acc.findIndex(a => a.commentId === cur.commentId)] = cur;
+            return acc;
+          }
+        }, [])
+    }),
+  
     [SET_PREVIEW]: (state, action) =>
     produce(state, (draft) => {
         draft.preview = action.payload.preview;
@@ -115,6 +145,7 @@ export default handleActions({
 
 
 const actionCreators = {
+    getCommentDB,
     addCommentDB,
     deleteCommentDB,
     editCommentDB,
