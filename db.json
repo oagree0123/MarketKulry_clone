@@ -6,13 +6,6 @@
       "author": "typicode"
     }
   ],
-  "comments": [
-    {
-      "id": 1,
-      "body": "some comment",
-      "postId": 1
-    }
-  ],
   "profile": {
     "name": "typicode"
   },
@@ -103,6 +96,29 @@
         "productImg": "https://img-cf.kurly.com/shop/data/goods/1642140736583y0.jpg"
       },
       "count": 3
+    }
+  ],
+  "comments" : 
+  [
+    {
+      "id": 1,
+      "commentId" : 1,
+      "title" : "진짜 맛있어요!",
+      "username" : "abc",
+      "name" : "르탄이",
+      "content" : "이것보다 맛있는 것은 없어요!",
+      "createdAt" : "2022-02-21 20:22:07",
+      "img" : "https://img-cf.kurly.com/shop/data/review/20220222/a6afc3b3f19a364469242b824e8cb768.jpg"
+    },
+    {
+      "id": 2,
+      "commentId" : 2,
+      "title" : "너무 잘먹었습니다!너무 잘먹었습니다!너무 잘먹었습니다!너무 잘먹었습니다!너무 잘먹었습니다!너무 잘먹었습니다!너무 잘먹었습니다!너무 잘먹었습니다!",
+      "username" : "abc",
+      "name" : "르탄이",
+      "content" : "너무 잘먹었습니다!너무 잘먹었습니다!너무 잘먹었습니다!너무 잘먹었습니다!너무 잘먹었습니다!너무 잘먹었습니다!너무 잘먹었습니다!너무 잘먹었습니다!너무 잘먹었습니다!너무 잘먹었습니다!",
+      "createdAt" : "2022-02-21 20:22:07",
+      "img" : "https://img-cf.kurly.com/shop/data/review/20220222/b4847856e5c54e084442b8ceccf2635a.jpg"
     }
   ]
 }

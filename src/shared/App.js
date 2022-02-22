@@ -18,13 +18,14 @@ import { actionCreators as userActions } from '../redux/modules/user'
 function App() {
   const dispatch = useDispatch();
 
-  const is_session = localStorage.getItem('token');
+  const login_token = localStorage.getItem('token');
 
   useEffect(() =>{
-    if(is_session) {
+    if(login_token) {
       dispatch(userActions.loginCheckDB());
     }
   }, [])
+  
   return (
     <React.Fragment>
       <Header />

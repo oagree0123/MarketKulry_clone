@@ -27,7 +27,9 @@ const ProductDetail = (props) => {
   return (
     <>
       {product &&
-        <Detail {...product} product_id={product_id} />
+        <div>
+          <Detail {...product} product_id={product_id} />
+        </div>
       }
     </>
   );
