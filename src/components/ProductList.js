@@ -19,7 +19,72 @@ const ProductList = (props) => {
     dispatch(productActions.getProductDB());
   }, []);
 
-
+  const product_datas = [
+    {
+      id: 1,
+      productId: 1,
+      productName: "[한와담 블랙] 곱개장",
+      price: "8900",
+      desc: "칼칼하게 즐기는 곱창 육개장",
+      productImg: "https://img-cf.kurly.com/shop/data/goods/1637822466321y0.jpg"
+    },
+    {
+      id: 2,
+      productId: 2,
+      productName: "[블루] MSC인증 자숙랍스터 2미 (냉동)",
+      price: 42000,
+      desc: "손쉽게 즐기는 탱글한 속살",
+      productImg: "https://img-cf.kurly.com/shop/data/goods/1637650155968y0.jpg"
+    },
+    {
+      id: 3,
+      productId: 3,
+      productName: "[오뗄블랙라벨] 1980 알뜰 소시지",
+      price: 4900,
+      desc: "추억의 분홍 소시지",
+      productImg: "https://img-cf.kurly.com/shop/data/goods/1642140736583y0.jpg"
+    },
+    {
+      id: 4,
+      productId: 4,
+      productName: "[Dole] 유기농 바나나 500g",
+      price: 2980,
+      desc: "건강하게 즐기는 유기농 과일 (1팩/500g)",
+      productImg: "https://img-cf.kurly.com/shop/data/goods/1637923209812l0.jpg"
+    },
+    {
+      id: 1,
+      productId: 1,
+      productName: "[한와담 블랙] 곱개장",
+      price: "8900",
+      desc: "칼칼하게 즐기는 곱창 육개장",
+      productImg: "https://img-cf.kurly.com/shop/data/goods/1637822466321y0.jpg"
+    },
+    {
+      id: 2,
+      productId: 2,
+      productName: "[블루] MSC인증 자숙랍스터 2미 (냉동)",
+      price: 42000,
+      desc: "손쉽게 즐기는 탱글한 속살",
+      productImg: "https://img-cf.kurly.com/shop/data/goods/1637650155968y0.jpg"
+    },
+    {
+      id: 3,
+      productId: 3,
+      productName: "[오뗄블랙라벨] 1980 알뜰 소시지",
+      price: 4900,
+      desc: "추억의 분홍 소시지",
+      productImg: "https://img-cf.kurly.com/shop/data/goods/1642140736583y0.jpg"
+    },
+    {
+      id: 4,
+      productId: 4,
+      productName: "[Dole] 유기농 바나나 500g",
+      price: 2980,
+      desc: "건강하게 즐기는 유기농 과일 (1팩/500g)",
+      productImg: "https://img-cf.kurly.com/shop/data/goods/1637923209812l0.jpg"
+    }
+  ]
 
   const settings = {
     dots: false,
@@ -33,10 +98,18 @@ const ProductList = (props) => {
     <ProductListContainer>
       <ProductListWrap>
         <ProductListTitle>
-          <Text is_size={"28px"}>이 상품 어때요?</Text>
+          <p style={{
+            color: "rgb(51, 51, 51)",
+            fontSize: "28px",
+            lineHeight: 1.15,
+            letterSpacing: "-0.26px",
+            fontWeight: 500,
+          }} 
+          >이 상품 어때요?</p>
+          
         </ProductListTitle>
         <StyledSlider {...settings}>
-          {product_list.map((p, idx) => {
+          {product_datas.map((p, idx) => {
             return <Product key={idx} {...p} />;
           })}
         </StyledSlider>

@@ -71,6 +71,7 @@ const Login = () => {
             is_radius={"3px"}
             is_border="1px solid #5f0080"
             is_size="16px"
+            is_cursor
             _onClick={() => {
               login();
             }}
