@@ -15,9 +15,9 @@ const ProductList = (props) => {
 
   const product_list = useSelector((state) => state.product.list);
 
-  useEffect(() => {
+  /* useEffect(() => {
     dispatch(productActions.getProductDB());
-  }, []);
+  }, []); */
 
   const product_datas = [
     {

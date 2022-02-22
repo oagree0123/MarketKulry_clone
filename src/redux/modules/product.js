@@ -28,11 +28,17 @@ const initialPost = {
 
 //미들웨어
 
-const getProductDB = () => {
+const getProductDB = (page_num) => {
   return async function (dispatch, getState) {
-    api.get("/products")
+    api.get("/products", {
+      params: {
+        "page" : parseInt(page_num),
+        "size" : 20
+      }
+    })
       .then((response) => {
         dispatch(getProduct(response.data));
+        window.scrollTo(0, 0);
       })
       .catch((err) => {
         console.log(err);
@@ -57,7 +63,7 @@ export default handleActions(
   {
     [GET_PRODUCT]: (state, action) =>
       produce(state, (draft) => {
-        draft.list.push(...action.payload.post_list);
+        draft.list = action.payload.post_list;
 
         draft.list = draft.list.reduce((acc, cur) => {
           if (acc.findIndex((a) => a.productId === cur.productId) === -1) {

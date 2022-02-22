@@ -7,16 +7,19 @@ import { actionCreators as cartActinos } from '../redux/modules/cart';
 const OrderInfo = (props) => {
   const dispatch = useDispatch();
 
-  const productInCartIdList = [];
-  const cart_list = props;
-
+  /* let productInCartIdList = [];
+  const cart_list = props; */
   const is_login = useSelector(state => state.user.is_login);
+  const cart_list = useSelector(state => state.cart.list);
   
-  for(let i=0; i < cart_list.length; i++){
-    productInCartIdList.push(cart_list[i].productInCartId)
-  }
   
   const orderCart = ()=>{
+    let productInCartIdList = []
+
+    for(let i=0; i < cart_list.length; i++){
+      productInCartIdList.push(cart_list[i].productInCartId)
+    }
+
     dispatch(cartActinos.orderCartDB(productInCartIdList))
   }
 

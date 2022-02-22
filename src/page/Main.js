@@ -25,8 +25,8 @@ const Main = () => {
         is_height="140px"
         is_margin="0 auto 40px auto" 
       />
-  {/* <ProductList2/> */}
-  <ProductList3/>
+      <ProductList2/>
+      {/* <ProductList3/> */}
     </>
   );
 };
