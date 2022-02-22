@@ -14,10 +14,16 @@ const CartList = (props) => {
  
   const [allSelect, setAllSelect] = useState(true);
 
+  let cur_price = useSelector(state => state.cart.total_price)
+
+  cart_list.map((c, i) => {
+    cur_price = cur_price + (c.count * c.product.price);
+  })
 
   useEffect(() => {
-    dispatch(cartActinos.getCartDB());
-    console.log("cart_list3",cart_list)
+    if(cart_list){
+      dispatch(cartActinos.getCartDB());
+    }
   }, [])
 
   return (
@@ -70,11 +76,14 @@ const CartList = (props) => {
       <CartContent>
         <CartListWrap>
           {/* Cart */}
-          {cart_list.map((c, i) => {
+          {cart_list ?
+          cart_list.map((c, i) => {
             return <Cart key={i} {...c} />
-          })}
+          }):
+          null
+          }
         </CartListWrap>
-        <OrderInfo {...cart_list} />
+        <OrderInfo {...cart_list} cur_price={cur_price} />
       </CartContent>
     </CartWrap>
   );

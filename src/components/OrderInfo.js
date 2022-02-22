@@ -1,7 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
+
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as cartActinos } from '../redux/modules/cart';
+
 const OrderInfo = (props) => {
   const dispatch = useDispatch();
   const productInCartIdList=[];
@@ -15,11 +17,23 @@ const OrderInfo = (props) => {
   React.useEffect(()=>{
     console.log("cart_list2",cart_list)
   })
+  
 const orderCart = ()=>{
   dispatch(cartActinos.orderCartDB(productInCartIdList))
  
 }
-  
+
+  let cur_price = props.cur_price;
+  let total_price = 0;
+  const delivery_fee = 3000;
+
+  if(parseInt(props.cur_price) >= 50000 ) {
+    total_price = cur_price;
+  }
+  else {
+    total_price = cur_price + delivery_fee;
+  }
+
   return (
     <CartInfo>
           <UserAddress>
@@ -51,7 +65,7 @@ const orderCart = ()=>{
             <TotalPriceDl>
               <dt>상품금액</dt>
               <dd>
-                27,480
+                {cur_price.toLocaleString("ko-KR")}
                 <span style={{
                     paddingLeft: "2px",
                     fontSize: "16px",
@@ -73,7 +87,13 @@ const orderCart = ()=>{
             <TotalPriceDl>
               <dt>배송비</dt>
               <dd>
-                +3,000
+                {
+                  cur_price >= 50000 ?
+                  "0" : 
+                    cur_price === 0 ?
+                    "0" :
+                    "+3,000"
+                }
                 <span style={{
                     paddingLeft: "2px",
                     fontSize: "16px",
@@ -82,13 +102,20 @@ const orderCart = ()=>{
               </dd>
             </TotalPriceDl>
               <FreeFeeWrap>
-                12,345원 추가주문 시, 
+                {
+                  cur_price >= 50000 ?
+                  "0원 추가주문 시," :
+                  `${(50000 - cur_price).toLocaleString('ko-KR')}원 추가주문 시,`
+                }
                 <strong style={{fontWeight: "400"}}> 무료배송</strong>
               </FreeFeeWrap>
             <AmountPriceDl>
               <dt>결제예정금액</dt>
               <dd>
-                30,480
+                { cur_price === 0 ?
+                  "0" :
+                  (total_price).toLocaleString('ko-KR')
+                }
                 <span style={{
                   paddingLeft: "2px",
                   fontSize: "16px",

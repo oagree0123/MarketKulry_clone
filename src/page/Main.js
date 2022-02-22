@@ -17,7 +17,7 @@ const Main = () => {
   return (
     <>
       <MainContainer>
-            <Ad/>
+        <Ad/>
       <ProductList/>
       </MainContainer>
       <Image 

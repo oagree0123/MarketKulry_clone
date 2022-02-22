@@ -4,18 +4,24 @@ import styled from "styled-components";
 import { actionCreators as cartActions } from "../redux/modules/cart";
 
 const Cart = (props) => {
+  console.log(props);
   const dispatch = useDispatch();
 
   const [item_select, setItemSelect] = useState(true);
-  const [count, setCount] = useState(props.count);
-  const [cur_price, setCurPrice] = useState(props.product.price * props.count);
 
-  const editItemCount = (cur_count) => {
-    dispatch(cartActions.editCartCountDB(props.productInCartId, cur_count));
+  const editItemCount = (type) => {
+    if(type === "plus") {
+      dispatch(cartActions.editCartCountDB(props.productInCartId, props.count+1));
+    }
+    else if(type === "minus") {
+      dispatch(cartActions.editCartCountDB(props.productInCartId, props.count-1));
+    }
   }
 
   const deleteItem = () => {
-    dispatch(cartActions.deleteCartDB(props.productInCartId))
+    if(window.confirm("정말 삭제하시겠습니다까?")){
+      dispatch(cartActions.deleteCartDB(props.productInCartId))
+    }
   }
 
   return (
@@ -51,11 +57,10 @@ const Cart = (props) => {
             <CardBtnWrap>
               <CardBtn
                 onClick={() => {
-                  if (count <= 0) {
+                  if (props.count <= 0) {
                     return;
                   }
-                  setCount(count - 1);
-                  editItemCount(count - 1);
+                  editItemCount("minus");
                 }}
               >
                 -
@@ -63,14 +68,13 @@ const Cart = (props) => {
               <CardCnt>{props.count}</CardCnt>
               <CardBtn
                 onClick={() => {
-                  setCount(count + 1);
-                  editItemCount(count + 1);
+                  editItemCount("plus");
                 }}
               >
                 +
               </CardBtn>
             </CardBtnWrap>
-            <CardPrice>{cur_price.toLocaleString('ko-KR')}원</CardPrice>
+            <CardPrice>{(props.product.price * props.count).toLocaleString('ko-KR')}원</CardPrice>
             <CardCloseBtn onClick={deleteItem} />
           </CardPriceWrap>
         </CartCard>

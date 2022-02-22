@@ -27,9 +27,7 @@ const Header = (props) => {
         />
         {is_login ?
           <UserMenu>
-            <UserMenuItem onClick={() => {
-              history.push('/login');
-            }}>
+            <UserMenuItem>
               {userInfo.name} 님
             </UserMenuItem>
             <UserMenuItem onClick={clickLogout}>
