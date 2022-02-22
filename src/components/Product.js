@@ -14,6 +14,7 @@ const Product =(props) =>{
         <ProductContainer>
             <div onClick={()=>{
                 history.push(`/product/${productId}`)
+                window.scrollTo(0, 0);
             }}>
             <Image src={productImg} is_width={"249px"} is_height={"320px"} />
             <Text>{productName}</Text>

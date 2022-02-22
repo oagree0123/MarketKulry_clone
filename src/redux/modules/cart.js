@@ -63,7 +63,7 @@ const addCartDB = (product_id, count) => {
       .then((response) => {
         console.log(response.data);
         dispatch(addCart(response.data))
-        console.log("카트담기 성공");
+        window.alert("상품을 담으셨습니다.")
       })
       .catch((err) => {
         console.log("카트담기 실패", err);

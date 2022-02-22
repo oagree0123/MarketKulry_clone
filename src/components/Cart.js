@@ -19,7 +19,9 @@ const Cart = (props) => {
   }
 
   const deleteItem = () => {
-    dispatch(cartActions.deleteCartDB(props.productInCartId))
+    if(window.confirm("정말 삭제하시겠습니다까?")){
+      dispatch(cartActions.deleteCartDB(props.productInCartId))
+    }
   }
 
   return (
