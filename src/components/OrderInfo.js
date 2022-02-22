@@ -1,7 +1,27 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import { useDispatch, useSelector } from 'react-redux';
+import { actionCreators as cartActinos } from '../redux/modules/cart';
+
 const OrderInfo = (props) => {
+  const dispatch = useDispatch();
+  const productInCartIdList=[];
+  const cart_list=props;
+  
+  for(let i in cart_list){
+    productInCartIdList.push(cart_list[i].productInCartId)
+  }
+  
+  console.log("cart_list1",cart_list) 
+  React.useEffect(()=>{
+    console.log("cart_list2",cart_list)
+  })
+  
+const orderCart = ()=>{
+  dispatch(cartActinos.orderCartDB(productInCartIdList))
+ 
+}
 
   let cur_price = props.cur_price;
   let total_price = 0;
@@ -139,7 +159,11 @@ const OrderInfo = (props) => {
                 </span>
               </PointWrap>
           </TotalPriceWrap>
-          <OrderBtn>
+          <OrderBtn 
+          onClick={()=>{
+            orderCart()
+          }}
+          >
             주문하기
           </OrderBtn>
         </CartInfo>

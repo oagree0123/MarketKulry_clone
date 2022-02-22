@@ -1,11 +1,16 @@
 import React from "react";
 
+
+import { Image } from '../elements';
+
 import ProductList from '../components/ProductList';
 import Ad from '../components/Ad';
+import ProductList2 from "../components/ProductList2";
+
 import styled from 'styled-components';
 import { useDispatch} from "react-redux"
 import { actionCreators } from "../redux/modules/user";
-import { Image } from '../elements';
+
 const Main = () => {
   const dispatch = useDispatch();
   
@@ -21,6 +26,8 @@ const Main = () => {
         is_height="140px"
         is_margin="0 auto 40px auto" 
       />
+  <ProductList2/>
+
     </>
   );
 };

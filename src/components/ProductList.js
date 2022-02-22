@@ -19,52 +19,11 @@ const ProductList = (props) => {
     dispatch(productActions.getProductDB());
   }, []);
 
- /*  const _product_list = {[
-    {
-      productId: "1",
-      productName: "[스윗밸런스] 오늘의 샐러드 6종",
-      price: "4,655원",
-      desc: "",
-      productImg: "https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbjFkuZ%2FbtrtE2JXhyF%2F3C7YeiaosE7lbO6umVRVo0%2Fimg.png",
-    },
-    {
-      productId: "2",
-      productName: "[이연복의 목란] 짬뽕 2인분",
-      price: "12,935원",
-      desc: "",
-      productImg:
-        "https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbiXuXj%2FbtrtIlIwIsJ%2FBRzGHbPcOYIa7jvHsyWrW0%2Fimg.png",
-    },
-    {
-      productId: "3",
-      productName: "[탄단지] 가벼운 한식 도시락 6종",
-      price: "4,200원",
-      desc: "장에 좋은 요거트",
-      productImg:
-        "https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbQWWMg%2FbtrtKH48Kut%2Fe0dGCfdltNMXpXP2GGckqK%2Fimg.png",
-    },
-    {
-      productId: "4",
-      productName: "[신규회원 이벤트] [존쿡 델리미트] 바베큐 백립",
-      price: "1,000원",
-      desc: "장에 좋은 요거트",
-      productImg:
-        "https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fb3aBg0%2FbtrtHTZOAGd%2F8YJK3kICPUeyJNlkNFX8p1%2Fimg.png",
-    },
-    {
-      productId: "5",
-      productName: "[스윗밸런스] 오늘의 샐러드 6종",
-      price: "4,655원",
-      desc: "장에 좋은 요거트",
-      productImg:
-        "https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbjFkuZ%2FbtrtE2JXhyF%2F3C7YeiaosE7lbO6umVRVo0%2Fimg.png",
-    }
-  ]
-}; */
+
 
   const settings = {
-    dots: true,
-    infinite: true,
+    dots: false,
+    infinite: false,
     speed: 500,
     slidesToShow: 4,
     slidesToScroll: 1,
@@ -76,7 +35,6 @@ const ProductList = (props) => {
         <ProductListTitle>
           <Text is_size={"28px"}>이 상품 어때요?</Text>
         </ProductListTitle>
-
         <StyledSlider {...settings}>
           {product_list.map((p, idx) => {
             return <Product key={idx} {...p} />;
@@ -128,9 +86,9 @@ const StyledSlider = styled(Slider)`
     color: #000;
     width: 60px;
     height: 60px;
-    right: 0ps;
+    right: -5px;
     font-size: 60px;
-    z-index: 100;;
+    z-index: 100;
     position: absolute;
     transform: translate(50%, -50%);
     transition: background 0.5s ease 0s;

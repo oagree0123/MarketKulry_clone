@@ -285,6 +285,7 @@ const ButtonWrap = styled.div`
   display: flex;
   padding: 45px 0px 0px;
 `;
+
 const FooterFooter = styled.div`
   background-color: #f7f7f7;
   text-align: center;
@@ -293,14 +294,17 @@ const FooterFooter = styled.div`
 
 const InnerLeft = styled.div``;
 const InnerRight = styled.div``;
+
 const LeftDiv = styled.div`
   display: flex;
   padding: 16px 0px 0px;
 `;
+
 const KurlyMenu = styled.ul`
   display: flex;
   padding: 0px 0px 29px;
 `;
+
 const OutterFooter = styled.div`
   margin: 0 auto;
   display: flex;
@@ -310,17 +314,20 @@ const OutterFooter = styled.div`
   height: 82px;
   padding: 20px 0px 24px;
 `;
+
 const Flex = styled.div`
   display: flex;
   width: 267px;
   height: 34px;
 `;
+
 const FooterContainer = styled.div`
   width: 100%;
   min-width: 1050px;
   height: 507px;
   margin: 0px auto;
 `;
+
 const InnerFooter = styled.div`
   width: 1050px;
   height: 322px;
@@ -328,6 +335,7 @@ const InnerFooter = styled.div`
   justify-content: space-between;
   margin: 0px auto;
 `;
+
 const Flex2 = styled.div`
   display: flex;
   width: 428px;

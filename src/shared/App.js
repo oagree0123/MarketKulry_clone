@@ -24,9 +24,8 @@ function App() {
       dispatch(userActions.loginCheckDB());
     }
   }, [])
-
   return (
-    <>
+    <React.Fragment>
       <Header />
       <ConnectedRouter  history={history}>
         <Route path="/" exact component={Main} />
@@ -35,7 +34,7 @@ function App() {
         <Route path='/cart/:username' exact component={CartList} />
       </ConnectedRouter>
       <Footer/>
-    </>
+    </React.Fragment>
   );
 }
 

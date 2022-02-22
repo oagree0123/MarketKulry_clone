@@ -11,7 +11,7 @@ const CartList = (props) => {
   const dispatch = useDispatch();
 
   const cart_list = useSelector(state => state.cart.list)
-
+ 
   const [allSelect, setAllSelect] = useState(true);
 
   let cur_price = useSelector(state => state.cart.total_price)
@@ -83,7 +83,7 @@ const CartList = (props) => {
           null
           }
         </CartListWrap>
-        <OrderInfo cur_price={cur_price} />
+        <OrderInfo {...cart_list} cur_price={cur_price} />
       </CartContent>
     </CartWrap>
   );

@@ -9,6 +9,7 @@ const GET_CART = "GET_CART";
 const ADD_CART = "ADD_CART";
 const EDIT_CART = "EDIT_CART";
 const DELETE_CART = "DELETE_CART";
+const ORDER_CART ="ORDER_CART";
 
 // action creators
 const getCart = createAction(GET_CART, (cart_list) => ({cart_list}));
@@ -17,6 +18,8 @@ const editdCart = createAction(EDIT_CART, (cart_id, count) => ({ cart_id, count 
 const deleteCart = createAction(DELETE_CART, (cart_index) => ({
   cart_index,
 }));
+const orderCart = createAction(ORDER_CART,()=>({}));
+
 
 // initial state
 const initialState = {
@@ -48,7 +51,6 @@ const getCartDB = () => {
 const addCartDB = (product_id, count) => {
   const token = localStorage.getItem('token');
   return function (dispatch, getState, { history }) {
-    console.log(product_id, count);
     /* axios
       .post(`http://localhost:3003/cart/${product_id}`, {
         count: count,
@@ -120,6 +122,33 @@ const deleteCartDB = (productInCartId) => {
   };
 };
 
+const orderCartDB = (productInCartIdList)=>{
+    return function (dispatch, getState,{history}){
+        // dispatch(orderCart());
+        const token = localStorage.getItem("token");
+        axios
+        .post("http://3.38.178.109/order",{
+            productInCartIdList: productInCartIdList
+        },
+        {
+            headers: {
+          Authorization: `${token}`,
+        }
+      }
+        )
+        .then((response)=>{
+            console.log("주문하기 성공!",response)
+            dispatch(orderCart());
+            
+        })
+        .catch((err)=>{
+            console.log("주문하기 실패", err)
+        })
+    }
+}
+
+
+
 // reducer
 export default handleActions(
   {
@@ -171,6 +200,10 @@ export default handleActions(
 
         draft.list = new_cart_product;
     }),
+    [ORDER_CART]: (state, action) =>
+      produce(state, (draft) => {
+        draft.list=[];
+    }),
   },
   initialState
 );
@@ -180,6 +213,8 @@ const actionCreators = {
   addCartDB,
   editCartCountDB,
   deleteCartDB,
+  orderCartDB,
+
 };
 
 export { actionCreators };
