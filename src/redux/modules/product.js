@@ -32,7 +32,7 @@ const getProductDB = () => {
   return async function (dispatch, getState) {
     api.get("/products")
       .then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
         dispatch(getProduct(response.data));
       })
       .catch((err) => {

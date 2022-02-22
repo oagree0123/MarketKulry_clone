@@ -44,7 +44,7 @@ const addCommentDB = (productId, comment = {}) => {
         const token = localStorage.getItem('token');
         const form = new FormData()
         form.append('title', comment.title)
-        form.append('contents', comment.contents)
+        form.append('content', comment.contents)
         form.append('img',comment.img)
         await api.post(`comment/${productId}`, 
         form,

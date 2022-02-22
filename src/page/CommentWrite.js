@@ -75,8 +75,7 @@ console.log(product_list)
             {_productImg}
             {_productName}
         </CommentTop>
-       
-            <tbody>
+                   <tbody>
                 <tr>
                     <CommentTh width="110px">제목</CommentTh>
                     <CommentTitleTd>
