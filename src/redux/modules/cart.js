@@ -7,6 +7,7 @@ import axios from "axios";
 const GET_CART = "GET_CART";
 const ADD_CART = "ADD_CART";
 const DELETE_CART = "DELETE_CART";
+const ORDER_CART ="ORDER_CART";
 
 // action creators
 const getCart = createAction(GET_CART, (cart_list) => ({cart_list}));
@@ -14,70 +15,26 @@ const addCart = createAction(ADD_CART, () => ({}));
 const deleteCart = createAction(DELETE_CART, (product_in_cart_id) => ({
   product_in_cart_id,
 }));
+const orderCart = createAction(ORDER_CART,()=>({}));
+
 
 // initial state
 const initialState = {
   list: [
-    {
-      id: 1,
-      productInCartId: 1,
-      count: 5,
-      product: {
-        productId: 1,
-        productName: "[한와담 블랙] 곱개장",
-        price: 8900,
-        desc: "칼칼하게 즐기는 곱창 육개장",
-        productImg:
-          "https://img-cf.kurly.com/shop/data/goods/1637822466321y0.jpg",
-      },
-    },
-    {
-      id: 2,
-      productInCartId: 2,
-      product: {
-        productId: 2,
-        productName: "[블루] MSC인증 자숙랍스터 2미 (냉동)",
-        price: 42000,
-        desc: "손쉽게 즐기는 탱글한 속살",
-        productImg:
-          "https://img-cf.kurly.com/shop/data/goods/1637650155968y0.jpg",
-      },
-      count: 2,
-    },
-    {
-      id: 3,
-      productInCartId: 3,
-      product: {
-        productId: 3,
-        productName: "[오뗄블랙라벨] 1980 알뜰 소시지",
-        price: 4900,
-        desc: "추억의 분홍 소시지",
-        productImg:
-          "https://img-cf.kurly.com/shop/data/goods/1642140736583y0.jpg",
-      },
-      count: 2,
-    },
-    {
-      id: 4,
-      productInCartId: 4,
-      product: {
-        productId: 4,
-        productName: "[오뗄블랙라벨] 1980 알뜰 소시지",
-        price: 4900,
-        desc: "추억의 분홍 소시지",
-        productImg:
-          "https://img-cf.kurly.com/shop/data/goods/1642140736583y0.jpg",
-      },
-      count: 2,
-    },
+    
   ],
 };
 
 // middlewares
 const getCartDB = () => {
     return async function (dispatch, getState) {
-        await axios
-          .get("http://localhost:3003/cart")
+        const token = localStorage.getItem("token");
+        axios
+        //   .get("http://localhost:3003/cart")
+           .get("http://3.38.178.109/cart",{
+            headers: {
+          Authorization: `${token}`,
+        }})
           .then((response) => {
             console.log(response);
             dispatch(getCart(response.data));
@@ -92,10 +49,17 @@ const getCartDB = () => {
 const addCartDB = (product_id, count) => {
   return function (dispatch, getState, { history }) {
     console.log(product_id, count);
+    const token = localStorage.getItem("token");
     axios
-      .post(`http://localhost:3003/cart/${product_id}`, {
-        counts: count,
-      })
+      .post(`http://3.38.178.109/cart/${product_id}`, {
+        count: count,
+      },
+      {
+          headers: {
+        Authorization: `${token}`,
+      }
+    }
+    )
       .then((response) => {
         /* dispatch(addCart()) */
         console.log("카트담기 성공");
@@ -109,7 +73,7 @@ const addCartDB = (product_id, count) => {
 const editCartCountDB = (productInCartId, count) => {
   return function (dispatch, getState, {history}) {
     axios
-      .put(`http://localhost:3003/cart/${productInCartId}`, {
+      .put(`http://3.38.178.109/cart/${productInCartId}`, {
         count: count
       })
       .then((res) => {
@@ -124,7 +88,7 @@ const editCartCountDB = (productInCartId, count) => {
 const deleteCartDB = (productInCartId) => {
   return function (dispatch, getState, { history }) {
     axios
-      .delete(`http://localhost:3003/cart/${productInCartId}`)
+      .delete(`http://3.38.178.109/cart/${productInCartId}`)
       .then((response) => {
         dispatch(deleteCart(productInCartId));
       })
@@ -133,6 +97,31 @@ const deleteCartDB = (productInCartId) => {
       });
   };
 };
+
+const orderCartDB = (productInCartIdList)=>{
+    return function (dispatch, getState,{history}){
+        // dispatch(orderCart());
+        const token = localStorage.getItem("token");
+        axios
+        .post("http://3.38.178.109/order",{
+            productInCartIdList: productInCartIdList
+        },
+        {
+            headers: {
+          Authorization: `${token}`,
+        }
+      }
+        )
+        .then((response)=>{
+            console.log("주문하기 성공!",response)
+            dispatch(orderCart());
+            
+        })
+        .catch((err)=>{
+            console.log("주문하기 실패", err)
+        })
+    }
+}
 
 // reducer
 export default handleActions(
@@ -156,6 +145,10 @@ export default handleActions(
 
         draft.list = new_cart_product;
     }),
+    [ORDER_CART]: (state, action) =>
+      produce(state, (draft) => {
+        draft.list=[];
+    }),
   },
   initialState
 );
@@ -165,6 +158,7 @@ const actionCreators = {
   addCartDB,
   editCartCountDB,
   deleteCartDB,
+  orderCartDB,
 };
 
 export { actionCreators };

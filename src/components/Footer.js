@@ -208,7 +208,8 @@ const FooterFooter = styled.div`
 background-color: #f7f7f7;
 text-align: center;
     padding: 19px 0 27px;
-}
+
+
 `
 const InnerLeft = styled.div`
 
@@ -226,23 +227,19 @@ const KurlyMenu = styled.ul`
 	
 `;
 const OutterFooter = styled.div`
-text-align: center;
-margin: 0px 200px 0px;
+	margin: 0px auto;
     display: flex;
 	font-size: 10px;
 	color: #999999;
-    width: 100%;
-    min-width: 1050px;
+    width: 1050px;
     height: 82px;
     padding : 20px 0px 24px;
-    
-    
-
 `;
 const Flex = styled.div`
 	display: flex;
      width: 267px;
      height: 34px;
+	 
 `;
 const FooterContainer = styled.div`
 width: 100%;
@@ -251,7 +248,6 @@ height: 507px;
 margin: 0px auto;
 `
 const InnerFooter = styled.div`
-
 width: 1050px;
 height: 322px;
 display: flex;

@@ -11,12 +11,13 @@ const CartList = (props) => {
   const dispatch = useDispatch();
 
   const cart_list = useSelector(state => state.cart.list)
-
+ 
   const [allSelect, setAllSelect] = useState(true);
 
 
   useEffect(() => {
     dispatch(cartActinos.getCartDB());
+    console.log("cart_list3",cart_list)
   }, [])
 
   return (
@@ -73,7 +74,7 @@ const CartList = (props) => {
             return <Cart key={i} {...c} />
           })}
         </CartListWrap>
-        <OrderInfo />
+        <OrderInfo {...cart_list} />
       </CartContent>
     </CartWrap>
   );

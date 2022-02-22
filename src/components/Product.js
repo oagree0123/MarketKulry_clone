@@ -17,7 +17,7 @@ const Product =(props) =>{
             }}>
             <Image src={productImg} is_width={"249px"} is_height={"320px"} />
             <Text>{productName}</Text>
-            <Text>{price}</Text>
+            <Text>{price.toLocaleString('ko-KR')}원</Text>
             </div>
         </ProductContainer>
     )

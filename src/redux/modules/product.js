@@ -28,8 +28,8 @@ const initialPost = {
 
 const getProductDB = () => {
   return async function (dispatch, getState) {
-    await axios
-      .get("http://localhost:3003/product")
+     axios
+      .get("http://3.38.178.109/products")
       .then((response) => {
         //console.log("LikePst",response.data.sortByLike);
         console.log(response.data);
@@ -44,7 +44,7 @@ const getProductDB = () => {
 const getOneProductDB = (product_id) => {
   return async function (dispatch, useState, { history }) {
     await axios
-      .get(`http://localhost:3003/product/${product_id}`)
+      .get(`http://3.38.178.109/product/${product_id}`)
       .then(function (response) {
         console.log(response.data);
         dispatch(getProduct([response.data]));

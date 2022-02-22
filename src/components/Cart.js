@@ -60,7 +60,7 @@ const Cart = (props) => {
               >
                 -
               </CardBtn>
-              <CardCnt>{count}</CardCnt>
+              <CardCnt>{props.count}</CardCnt>
               <CardBtn
                 onClick={() => {
                   setCount(count + 1);
