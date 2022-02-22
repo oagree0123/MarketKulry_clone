@@ -25,9 +25,9 @@ const Product =(props) =>{
 }
 
 const ProductContainer= styled.div`
- width: 267px;
- height: 435px;
- padding:0px 9px
-`
+  width: 249px;
+  height: 435px;
+  /* padding:0px 9px */
+`;
 
 export default Product;

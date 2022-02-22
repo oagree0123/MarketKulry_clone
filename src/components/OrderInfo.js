@@ -6,22 +6,17 @@ import { actionCreators as cartActinos } from '../redux/modules/cart';
 
 const OrderInfo = (props) => {
   const dispatch = useDispatch();
-  const productInCartIdList=[];
-  const cart_list=props;
+
+  const productInCartIdList = [];
+  const cart_list = props;
   
-  for(let i in cart_list){
+  for(let i=0; i < cart_list.length; i++){
     productInCartIdList.push(cart_list[i].productInCartId)
   }
   
-  console.log("cart_list1",cart_list) 
-  React.useEffect(()=>{
-    console.log("cart_list2",cart_list)
-  })
-  
-const orderCart = ()=>{
-  dispatch(cartActinos.orderCartDB(productInCartIdList))
- 
-}
+  const orderCart = ()=>{
+    dispatch(cartActinos.orderCartDB(productInCartIdList))
+  }
 
   let cur_price = props.cur_price;
   let total_price = 0;

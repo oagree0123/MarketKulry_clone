@@ -122,30 +122,27 @@ const deleteCartDB = (productInCartId) => {
   };
 };
 
-const orderCartDB = (productInCartIdList)=>{
-    return function (dispatch, getState,{history}){
-        // dispatch(orderCart());
-        const token = localStorage.getItem("token");
-        axios
-        .post("http://3.38.178.109/order",{
-            productInCartIdList: productInCartIdList
-        },
-        {
-            headers: {
-          Authorization: `${token}`,
+const orderCartDB = (productInCartIdList) => {
+  return function (dispatch, getState, { history }) {
+    // dispatch(orderCart());
+    const token = localStorage.getItem("token");
+    api.post("/order", {
+          productInCartIdList: productInCartIdList,
+        }, {
+          headers: { 
+            Authorization: `${token}`,
+          },
         }
-      }
-        )
-        .then((response)=>{
-            console.log("주문하기 성공!",response)
-            dispatch(orderCart());
-            
-        })
-        .catch((err)=>{
-            console.log("주문하기 실패", err)
-        })
-    }
-}
+      )
+      .then((response) => {
+        console.log("주문하기 성공!", response);
+        dispatch(orderCart());
+      })
+      .catch((err) => {
+        console.log("주문하기 실패", err);
+      });
+  };
+};
 
 
 
