@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Button = (props) => {
-  const { children, is_margin, is_padding, is_width, is_background, is_color, is_border, is_radius, is_height, _onClick, is_size, is_weight } = props;
+  const { children, is_margin, is_padding, is_width, is_background, is_color, is_border, is_radius, is_height, _onClick, is_size, is_weight, is_disabled} = props;
 
   const styles = {
     is_margin: is_margin,
@@ -15,6 +15,7 @@ const Button = (props) => {
     is_radius: is_radius,
     is_size: is_size,
     is_weight: is_weight,
+    is_disabled: is_disabled,
 }
 
   return (
@@ -37,6 +38,7 @@ Button.defaultProps = {
   is_radius: false,
   is_size: false,
   is_weight: false,
+  is_disabled:false
 }
 
 const ElButton = styled.button`
@@ -50,6 +52,7 @@ const ElButton = styled.button`
   ${(props) => (props.is_radius? `border-radius: ${props.is_radius};` : '')};
   ${(props) => (props.is_size? `font-size: ${props.is_size};` : '')};
   ${(props) => (props.is_weight? `font-weight: ${props.is_weight};` : '')};
+  ${(props) => (props.is_disabled? `disabled: ${props.is_disabled};` : '')};
 `;
 
 export default Button;
