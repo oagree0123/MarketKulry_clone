@@ -27,12 +27,14 @@ const ProductList2 = (props) => {
   );
 };
 
-const ProductWrap= styled.div`
-width: 1050px;
-margin : 0 auto;
-min-width: 1050px;
-display: flex;
-flex-wrap: wrap;
-gap: 10px 123px;
-`
+const ProductWrap = styled.div`
+  width: 1050px;
+  margin : 0 auto;
+  min-width: 1050px;
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 18px;
+`;
+
 export default ProductList2;

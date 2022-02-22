@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 
 import { Text, Button } from '../elements';
+import CommentList from '../components/CommentList';
 import { actionCreators as cartActions } from '../redux/modules/cart';
 
 const Detail = (props) => {
@@ -85,7 +86,7 @@ const Detail = (props) => {
                 letterSpacing:"0",
               }}
               >
-              15%
+              0%
             </span>
           </Text>
           <Text is_padding="7px 0px 0px 0px">
@@ -459,6 +460,11 @@ const Detail = (props) => {
           </WhyBottom>
         </WhyWrap>
       </DetailInfoWrap>
+      <CommentList 
+        product_id={product_id}
+        product_name={props.productName} 
+        product_img={props.productImg} 
+      />
     </DetailWrap>
   );
 };
