@@ -22,6 +22,7 @@ const ProductList2 = (props) => {
         <p
           style={{
             margin: 0,
+            marginBottom: "27px",
             padding: "8px",
             marginTop: "32px",
             fontSize: "28px",

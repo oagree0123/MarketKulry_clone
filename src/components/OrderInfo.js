@@ -165,6 +165,9 @@ const OrderInfo = (props) => {
               window.alert("로그인 후 주문이 가능합니다!")
               return;
             }
+            else {
+              window.alert("주문이 완료되었습니다!")
+            }
             orderCart()
           }}
           >

@@ -13,7 +13,9 @@ const Comment = (props) => {
   const [check_detail, setCheckDetail] = useState(false);
 
   const delReview = () => {
-    dispatch(commentActions.deleteCommentDB(props.commentId));
+    if(window.confirm("정말 삭제하시겠습니까?")){
+      dispatch(commentActions.deleteCommentDB(props.commentId));
+    }
   }
 
   return (
